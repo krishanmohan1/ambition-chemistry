@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Video, Clock, BookOpen, ExternalLink } from 'lucide-react';
+import { Play, Video, Clock, BookOpen, ExternalLink, X } from 'lucide-react';
 
 const FreeCourses = () => {
   const [activeVideo, setActiveVideo] = useState(null);
@@ -64,9 +64,13 @@ const FreeCourses = () => {
 
           <div className="fc-video-grid">
             {videos.map((video, idx) => (
-              <motion.div key={video.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (idx % 3) * 0.1 }} className="fc-video-card" onClick={() => setActiveVideo(activeVideo === video.id ? null : video.id)}>
+              <motion.div key={video.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (idx % 3) * 0.1 }} className="fc-video-card" onClick={() => setActiveVideo(video)}>
                 <div className="fc-video-thumb">
-                  <div className="fc-video-num">{String(video.id).padStart(2, '0')}</div>
+                  {video.ytId ? (
+                    <img src={`https://img.youtube.com/vi/${video.ytId}/maxresdefault.jpg`} alt={video.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    <div className="fc-video-num">{String(video.id).padStart(2, '0')}</div>
+                  )}
                   <div className="fc-video-play"><Play size={24} fill="white" /></div>
                 </div>
                 <div className="fc-video-info">
@@ -102,6 +106,49 @@ const FreeCourses = () => {
         </div>
       </section>
 
+      {/* Video Modal */}
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fc-modal-overlay" 
+            onClick={() => setActiveVideo(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }} 
+              animate={{ scale: 1, y: 0 }} 
+              exit={{ scale: 0.9, y: 20 }} 
+              className="fc-modal-content" 
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="fc-modal-close" onClick={() => setActiveVideo(null)}>
+                <X size={24} />
+              </button>
+              <div className="fc-modal-video">
+                {activeVideo.ytId ? (
+                  <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src={`https://www.youtube.com/embed/${activeVideo.ytId}?autoplay=1`} 
+                    title={activeVideo.title} 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', background: '#1a1a2e', color: 'white', flexDirection: 'column', gap: '1rem' }}>
+                    <Video size={48} />
+                    <p>Please provide a YouTube ID for this video to play.</p>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <style>{`
         .page-header { background: var(--primary-darker); padding: 10rem 0 5rem; position: relative; overflow: hidden; color: white; }
         .page-header__pattern { position: absolute; inset: 0; opacity: 0.04; background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px; }
@@ -122,8 +169,13 @@ const FreeCourses = () => {
         .fc-video-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
         .fc-video-meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
         .fc-video-free { background: rgba(16,185,129,0.1); color: #059669; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; }
+        .fc-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 1rem; backdrop-filter: blur(8px); }
+        .fc-modal-content { background: #0f1e35; width: 100%; max-width: 900px; border-radius: 16px; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); }
+        .fc-modal-close { position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.5); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background 0.3s; backdrop-filter: blur(4px); }
+        .fc-modal-close:hover { background: rgba(220,38,38,0.9); }
+        .fc-modal-video { width: 100%; aspect-ratio: 16/9; background: black; }
         @media (max-width: 900px) { .fc-video-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .fc-video-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .fc-video-grid { grid-template-columns: 1fr; } .fc-modal-overlay { padding: 0.5rem; } .fc-modal-close { top: 0.5rem; right: 0.5rem; } }
       `}</style>
     </div>
   );
