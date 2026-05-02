@@ -6,12 +6,12 @@ const FreeCourses = () => {
   const [activeVideo, setActiveVideo] = useState(null);
 
   const videos = [
-    { id: 1, title: "Solutions 01 — Introduction and Concentration Terms", duration: "26:40", ytId: null, chapter: "Solutions" },
-    { id: 2, title: "Solutions 04 — Colligative Property & Relative Lowering of Vapour Pressure", duration: "37:30", ytId: null, chapter: "Solutions" },
-    { id: 3, title: "Solutions 10 — Isotonic, Hypertonic and Hypotonic Solution", duration: "29:37", ytId: null, chapter: "Solutions" },
-    { id: 4, title: "Solution 12 — How to Solve Numericals on Van't Hoff Factor", duration: "25:30", ytId: null, chapter: "Solutions" },
-    { id: 5, title: "Solutions 13 — Ideal & Non-Ideal Solutions, Raoult's Law", duration: "45:46", ytId: null, chapter: "Solutions" },
-    { id: 6, title: "Solutions 14 — Azeotropic Mixture, Solubility & Henry's Law", duration: "25:20", ytId: null, chapter: "Solutions" },
+    { id: 1, title: "Solutions 01 — Introduction and Concentration Terms", duration: "26:40", ytId: "tVGdXJxnbj4", url: "https://youtu.be/tVGdXJxnbj4", chapter: "Solutions" },
+    { id: 2, title: "Solutions 04 — Colligative Property & Relative Lowering of Vapour Pressure", duration: "37:30", ytId: "5drbTlARkGw", url: "https://youtu.be/5drbTlARkGw", chapter: "Solutions" },
+    { id: 3, title: "Solutions 10 — Isotonic, Hypertonic and Hypotonic Solution", duration: "29:37", ytId: "MeGiptPJkQI", url: "https://youtu.be/MeGiptPJkQI", chapter: "Solutions" },
+    { id: 4, title: "Solution 12 — How to Solve Numericals on Van't Hoff Factor", duration: "25:30", ytId: "ejWCoO5r6PI", url: "https://youtu.be/ejWCoO5r6PI", chapter: "Solutions" },
+    { id: 5, title: "Solutions 13 — Ideal & Non-Ideal Solutions, Raoult's Law", duration: "45:46", ytId: "ejWCoO5r6PI", url: "https://youtu.be/ejWCoO5r6PI", chapter: "Solutions" },
+    { id: 6, title: "Solutions 14 — Azeotropic Mixture, Solubility & Henry's Law", duration: "25:20", ytId: "gTpg7ZuETic", url: "https://youtu.be/gTpg7ZuETic", chapter: "Solutions" },
   ];
 
   return (
@@ -64,7 +64,18 @@ const FreeCourses = () => {
 
           <div className="fc-video-grid">
             {videos.map((video, idx) => (
-              <motion.div key={video.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (idx % 3) * 0.1 }} className="fc-video-card" onClick={() => setActiveVideo(video)}>
+              <motion.a 
+                href={video.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={video.id} 
+                initial={{ opacity: 0, y: 30 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }} 
+                transition={{ delay: (idx % 3) * 0.1 }} 
+                className="fc-video-card"
+                style={{ textDecoration: 'none', display: 'block' }}
+              >
                 <div className="fc-video-thumb">
                   {video.ytId ? (
                     <img src={`https://img.youtube.com/vi/${video.ytId}/maxresdefault.jpg`} alt={video.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -81,7 +92,7 @@ const FreeCourses = () => {
                     <span className="fc-video-free">FREE</span>
                   </div>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
 
@@ -106,48 +117,7 @@ const FreeCourses = () => {
         </div>
       </section>
 
-      {/* Video Modal */}
-      <AnimatePresence>
-        {activeVideo && (
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
-            className="fc-modal-overlay" 
-            onClick={() => setActiveVideo(null)}
-          >
-            <motion.div 
-              initial={{ scale: 0.9, y: 20 }} 
-              animate={{ scale: 1, y: 0 }} 
-              exit={{ scale: 0.9, y: 20 }} 
-              className="fc-modal-content" 
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button className="fc-modal-close" onClick={() => setActiveVideo(null)}>
-                <X size={24} />
-              </button>
-              <div className="fc-modal-video">
-                {activeVideo.ytId ? (
-                  <iframe 
-                    width="100%" 
-                    height="100%" 
-                    src={`https://www.youtube.com/embed/${activeVideo.ytId}?autoplay=1`} 
-                    title={activeVideo.title} 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                  ></iframe>
-                ) : (
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', background: '#1a1a2e', color: 'white', flexDirection: 'column', gap: '1rem' }}>
-                    <Video size={48} />
-                    <p>Please provide a YouTube ID for this video to play.</p>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Video Modal Removed since embedding is disabled by channel owner */}
 
       <style>{`
         .page-header { background: var(--primary-darker); padding: 10rem 0 5rem; position: relative; overflow: hidden; color: white; }
