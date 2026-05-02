@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Target, Heart, Zap, Shield, CheckCircle, Youtube } from 'lucide-react';
+import { Target, Heart, Zap, Shield, CheckCircle, Video } from 'lucide-react';
 import teachingImg from '../assets/images/classroom-teaching.png';
 import exteriorImg from '../assets/images/institute-exterior.png';
 
@@ -87,7 +87,7 @@ const About = () => {
                   ))}
                 </ul>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a href="https://www.youtube.com/@sksinghambitionchemistrycl7255" target="_blank" rel="noreferrer" className="btn" style={{ background: '#dc2626', color: 'white', padding: '0.7rem 1.5rem' }}><Youtube size={18} /> YouTube Channel</a>
+                  <a href="https://www.youtube.com/@sksinghambitionchemistrycl7255" target="_blank" rel="noreferrer" className="btn" style={{ background: '#dc2626', color: 'white', padding: '0.7rem 1.5rem' }}><Video size={18} /> YouTube Channel</a>
                   <a href="tel:+918709446096" className="btn btn-outline" style={{ padding: '0.7rem 1.5rem' }}>Call: 087094 46096</a>
                 </div>
               </div>

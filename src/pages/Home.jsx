@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Phone, MessageCircle, ArrowRight, CheckCircle, BookOpen, Users, Trophy, Target, Clock, MapPin, Star, GraduationCap, Youtube, HelpCircle } from 'lucide-react';
+import { Phone, MessageCircle, ArrowRight, CheckCircle, BookOpen, Users, Trophy, Target, Clock, MapPin, Star, GraduationCap, Video, HelpCircle } from 'lucide-react';
 import heroImg from '../assets/images/classroom-hero.png';
 import classroom1 from '../assets/images/classroom1.png';
 import classroom2 from '../assets/images/classroom2.png';
@@ -92,7 +92,7 @@ const Home = () => {
               { icon: CheckCircle, title: "Basics to Advanced", desc: "Strong foundations before complex problem solving.", color: "sky" },
               { icon: Clock, title: "Flexible Batches", desc: "Multiple batch timings to suit your schedule.", color: "violet" },
               { icon: Trophy, title: "Proven Track Record", desc: "Consistent toppers & successful selections.", color: "teal" },
-              { icon: Youtube, title: "Free Video Lessons", desc: "100+ free lectures on YouTube channel.", color: "danger" },
+              { icon: Video, title: "Free Video Lessons", desc: "100+ free lectures on YouTube channel.", color: "danger" },
             ].map((f, idx) => (
               <motion.div key={idx} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0, transition: { delay: (idx % 4) * 0.1 } }} viewport={{ once: true, margin: "-50px" }} className="card">
                 <div className={`icon-box ${f.color}`}><f.icon size={24} /></div>
@@ -150,7 +150,7 @@ const Home = () => {
               <h2 className="text-3xl font-bold font-heading mb-4" style={{ color: 'white' }}>Free Video Lectures by SK Singh Sir</h2>
               <p className="text-lg mb-6" style={{ color: 'var(--text-white-muted)' }}>Access complete Solutions chapter for Class 12 — absolutely free. Learn JEE & NEET concepts from the comfort of home.</p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/free-courses" className="btn btn-amber"><Youtube size={20} /> Watch Free Lectures</Link>
+                <Link to="/free-courses" className="btn btn-amber"><Video size={20} /> Watch Free Lectures</Link>
                 <a href="https://www.youtube.com/@sksinghambitionchemistrycl7255" target="_blank" rel="noreferrer" className="btn btn-outline">Subscribe on YouTube</a>
               </div>
             </div>

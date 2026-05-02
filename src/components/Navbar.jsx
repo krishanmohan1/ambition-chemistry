@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, Phone, MessageCircle, Youtube } from 'lucide-react';
+import { Menu, X, Phone, MessageCircle, Video } from 'lucide-react';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -52,7 +52,7 @@ const Navbar = () => {
                 >
                   {link.name === 'Free Courses' ? (
                     <span className="navbar__link-free">
-                      <Youtube size={14} /> {link.name}
+                      <Video size={14} /> {link.name}
                     </span>
                   ) : link.name}
                 </NavLink>
@@ -99,7 +99,7 @@ const Navbar = () => {
                 onClick={closeMenu}
                 className={({ isActive }) => `drawer__link ${isActive ? 'drawer__link--active' : ''} ${link.name === 'Free Courses' ? 'drawer__link--free' : ''}`}
               >
-                {link.name === 'Free Courses' && <Youtube size={16} />}
+                {link.name === 'Free Courses' && <Video size={16} />}
                 {link.name}
               </NavLink>
             </li>

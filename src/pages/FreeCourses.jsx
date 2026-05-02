@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Youtube, Clock, BookOpen, ExternalLink } from 'lucide-react';
+import { Play, Video, Clock, BookOpen, ExternalLink } from 'lucide-react';
 
 const FreeCourses = () => {
   const [activeVideo, setActiveVideo] = useState(null);
@@ -22,11 +22,11 @@ const FreeCourses = () => {
         <div className="blob" style={{ top: '20%', right: '10%', background: '#dc2626', width: '350px', height: '350px', opacity: 0.12 }} />
         <div className="container relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="badge badge-danger mb-4"><Youtube size={16} /> Free on YouTube</span>
+            <span className="badge badge-danger mb-4"><Video size={16} /> Free on YouTube</span>
             <h1 className="page-header__title">Free Video <span style={{ background: 'linear-gradient(135deg, #dc2626, #f87171)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Lectures</span></h1>
             <p className="page-header__desc">Learn Chemistry for JEE & NEET from SK Singh Sir — completely free. High-quality video lectures on our YouTube channel.</p>
             <div className="flex flex-wrap justify-center gap-4 mt-8">
-              <a href="https://www.youtube.com/@sksinghambitionchemistrycl7255" target="_blank" rel="noreferrer" className="btn" style={{ background: '#dc2626', color: 'white' }}><Youtube size={20} /> Subscribe on YouTube</a>
+              <a href="https://www.youtube.com/@sksinghambitionchemistrycl7255" target="_blank" rel="noreferrer" className="btn" style={{ background: '#dc2626', color: 'white' }}><Video size={20} /> Subscribe on YouTube</a>
               <a href="https://wa.me/918709446096?text=I%20want%20to%20know%20about%20full%20courses" className="btn btn-outline">Want Full Course?</a>
             </div>
           </motion.div>
@@ -39,7 +39,7 @@ const FreeCourses = () => {
           <div className="grid grid-cols-4 gap-6">
             {[
               { label: "Total Videos", value: "118", icon: Play, color: "#dc2626", bg: "rgba(220,38,38,0.08)" },
-              { label: "Total Views", value: "76K+", icon: Youtube, color: "#f59e0b", bg: "rgba(245,158,11,0.08)" },
+              { label: "Total Views", value: "76K+", icon: Video, color: "#f59e0b", bg: "rgba(245,158,11,0.08)" },
               { label: "Subscribers", value: "2K+", icon: BookOpen, color: "#0d9488", bg: "rgba(13,148,136,0.08)" },
               { label: "Since", value: "2013", icon: Clock, color: "#a78bfa", bg: "rgba(167,139,250,0.08)" },
             ].map((s, idx) => (
